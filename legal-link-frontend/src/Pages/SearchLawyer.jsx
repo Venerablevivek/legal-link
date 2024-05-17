@@ -8,6 +8,7 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import LawyerCards from '../components/Common/LawyerCards';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const SearchLawyer = () => {
 
@@ -53,52 +54,24 @@ const getData = async() =>{
 
 
   return (
-    <div className='w-full h-full overflow-x-hidden flex flex-col gap-10 relative font-poppins bg-gray-100 ' >
+    <div className='w-full h-full overflow-x-hidden flex flex-col gap-10 relative font-poppins bg-gray-200 ' >
          <div className='absolute' >
             <Header/>
         </div>
 
         {/* main */}
-        <div className=' w-[85%] mx-auto mt-[80px] flex flex-col gap-[20px] ' >
+        <div className=' w-[85%] mx-auto mt-[150px] flex flex-col gap-[20px] ' >
             {/* up */}
-            <div className=' w-full  ' >
+            <div className=' w-full ' >
                 <h3 className=' text-[36px] font-inter font-bold ' >Lawyers</h3>
             </div>
 
-            <div className='w-full mx-auto bg-white rounded-md flex items-center justify-between relative ' >
-                <input 
-                  type='search'
-                  className='py-3 px-6 bg-transparent rounded-[10px] text-gray-800 w-full focus:outline-none cursor-pointer border-gray-300 border-2 '
-                  placeholder='Search Instructor ' 
-                  value={query}
-                  onChange={(e)=> setQuery(e.target.value)}
-                 />
-                 <CiSearch className=' w-[40px] h-[40px] absolute right-12 text-gray-400 ' />
-            </div>
             <div className=' flex gap-5 justify-between items-center ' >
                 <div className='w-full mx-auto bg-white rounded-md flex items-center justify-between relative ' >
                     <input 
                     type='search'
                     className='py-3 px-6 bg-transparent rounded-[10px] text-gray-800 w-full focus:outline-none cursor-pointer border-gray-300 border-2 '
-                    placeholder='Address ' 
-                    value={query}
-                    onChange={(e)=> setQuery(e.target.value)}
-                    />
-                </div>
-                <div className='w-full mx-auto bg-white rounded-md flex items-center justify-between relative ' >
-                    <input 
-                    type='search'
-                    className='py-3 px-6 bg-transparent rounded-[10px] text-gray-800 w-full focus:outline-none cursor-pointer border-gray-300 border-2 '
-                    placeholder='Topic' 
-                    value={query}
-                    onChange={(e)=> setQuery(e.target.value)}
-                    />
-                </div>
-                <div className='w-full mx-auto bg-white rounded-md flex items-center justify-between relative ' >
-                    <input 
-                    type='search'
-                    className='py-3 px-6 bg-transparent rounded-[10px] text-gray-800 w-full focus:outline-none cursor-pointer border-gray-300 border-2 '
-                    placeholder='Category' 
+                    placeholder='Search a Keyword ' 
                     value={query}
                     onChange={(e)=> setQuery(e.target.value)}
                     />
@@ -109,9 +82,13 @@ const getData = async() =>{
 
             <div className=' flex justify-between mt-[50px] ' >
                 <div className='flex gap-3 items-center cursor-pointer ' >
+                <Link to="/" >
                     <img src={homeImg} className=' w-[30px] h-[30px] ' />
+                    </Link>
                     < MdOutlineKeyboardArrowRight className=' w-[25px] h-[25px] text-gray-500 ' />
+                    <Link to="/search-lawyer" >
                     <p className=' text-lg font-semibold text-gray-600 ' >Lawyers</p>
+                    </Link>
                 </div>
             </div>
 

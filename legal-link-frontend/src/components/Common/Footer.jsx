@@ -12,7 +12,7 @@ const Footer = () => {
                             <p className='text-[#DC1F27] text-[25px] font-semibold ' >Legal-Link</p>
                         </div>
 
-                <p className="text-base leading-relaxed text-gray-600 mt-7">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
+                <p className="text-base text-justify leading-relaxed text-gray-600 mt-7">Our intuitive booking system lets you schedule lawyer appointments easily. Choose your preferred date, receive instant confirmation, and manage your bookings online for a seamless legal assistance experience.</p>
 
                 <ul className="flex items-center space-x-3 mt-9">
                     <li>

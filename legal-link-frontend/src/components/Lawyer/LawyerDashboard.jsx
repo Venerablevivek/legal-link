@@ -6,8 +6,6 @@ import Header from '../Common/Header.jsx';
 import Footer from '../Common/Footer.jsx';
 import MyBookings from './MyBookings.jsx';
 import LawyerProfile from './LawyerProfile.jsx';
-// import InstructorProfile from './InstructorProfile.jsx';
-// import MyBookings from './MyBookings.jsx';
 
 const LawyerDashboard = () => {
     const dispatch = useDispatch();

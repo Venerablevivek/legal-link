@@ -9,6 +9,8 @@ import LawyerDashboard from './components/Lawyer/LawyerDashboard';
 import UserDashboard from './components/User/UserDashboard';
 import SearchLawyer from './Pages/SearchLawyer';
 import LawyerBooking from './Pages/LawyerBooking';
+import AboutUs from './Pages/AboutUs';
+import LegalKnowledge from './Pages/LegalKnowledge';
 
 function App() {
 
@@ -22,6 +24,8 @@ function App() {
       <Route path='/contact-us' element={<ContactUs/>} />
       <Route path='/search-lawyer' element={<SearchLawyer/>} />
       <Route path='/book-lawyer/:id' element={<LawyerBooking/>} />
+      <Route path='/about-us' element={<AboutUs/>} />
+      <Route path='/legal-knowledge' element={<LegalKnowledge/>} />
       <Route path='/register' element={
                 <Register/>
             } />
