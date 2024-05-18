@@ -382,7 +382,7 @@ const deleteTimeSlot = (e, index) =>{
                text-[16px] leading-7 text-headingColor placeholder:text-textColor rounded-md cursor-pointer ' />
                               </div>
                               <div>
-                                  <p className=' font-semibold' >Hospital*</p>
+                                  <p className=' font-semibold' >Court*</p>
                                   <input type='text' name='hospital' value={item.hospital} 
                                   onChange={(e)=>handleExperienceChange(e, index)}
                                   className=' w-full px-4 py-3 border-b border-solid border-red-500 focus:outline-none focus:border-b-red-500
