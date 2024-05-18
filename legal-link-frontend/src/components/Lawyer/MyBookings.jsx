@@ -43,6 +43,9 @@ const MyBookings = () => {
                     General Info
                 </th>
                 <th scope='col' className='px-6 py-3 ' >
+                    Phone Number
+                </th>
+                <th scope='col' className='px-6 py-3 ' >
                     Gender
                 </th>
                 <th scope='col' className='px-6 py-3 ' >
@@ -80,7 +83,7 @@ const MyBookings = () => {
                                 </div>
                             </div>
                         </th>
-
+                        <td className='px-6 py-4 text-sm text-gray-800 whitespace-nowrap ' >{item.user.phoneNumber}</td>
                         <td className='px-6 py-4 text-sm text-gray-800 whitespace-nowrap ' >{item.user.gender}</td>
                         <td className='px-6 py-4 ' >
                         {

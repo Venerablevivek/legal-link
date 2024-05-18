@@ -33,10 +33,17 @@ const SidePanel = ({instructorId, ticketPrice, timeSlots}) => {
     const bookingHandler = async()=>{
         try {
 
+            if(!user){
+                navigate('/login');
+                return;
+            }
+
+            if(user.accountType==='Lawyer'){
+                toast.warning("Lawyers Cannot Book");
+                return;
+            }
+
             const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js")
-
-            console.log("isme aaya 1");
-
             if (!res) {
             toast.error(
                 "Razorpay SDK failed to load. Check your Internet Connection.")

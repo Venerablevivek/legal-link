@@ -6,6 +6,7 @@ import Header from '../Common/Header.jsx';
 import Footer from '../Common/Footer.jsx';
 import MyBookings from './MyBookings.jsx';
 import UserProfile from './UserProfile.jsx';
+import ReviewForm from './ReviewForm.jsx';
 
 const UserDashboard = () => {
     const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const UserDashboard = () => {
             <Header/>
         </div>
 
-        <div class=" flex flex-2 bg-red-100 mt-[70px] ">
+        <div class=" flex gap-10 bg-red-100 mt-[70px] ">
     <div class=" w-full hidden md:flex flex-col md:flex-row justify-between gap-[100px] ">
         <div class=" w-[15%] flex flex-col flex-grow pt-5 pb-10 overflow-y-auto bg-white">
 
@@ -116,6 +117,11 @@ const UserDashboard = () => {
         }
         {
             tab === 'settings' && <UserProfile />
+        }
+        {
+            tab === 'dashboard' && (
+                <ReviewForm/>
+            )
         }
 
     </div>

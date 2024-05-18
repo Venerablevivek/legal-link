@@ -174,3 +174,30 @@ export function createStreak(id, present, streak, navigate) {
         toast.dismiss(toastId)
     }
 }
+
+export function createReview(name,rating,job,imageUrl,reviewText,navigate) {
+
+    return async (dispatch) => {
+        const toastId = toast.loading("Loading...")
+        dispatch(setLoading(true))
+        try {
+            const response = await apiConnector("POST", `${BASE_URL}/user/review/create`, {
+                name:name,rating,job,imageUrl,reviewText
+            });
+
+            if(!response.data.success){
+                throw new Error(response.data.message)
+            }
+
+            toast.success("Review Created Successfully");
+            navigate("/dashboard/user/my-profile");
+
+        } catch (error) {
+            console.log("Update user api ERROR.............", error)
+            toast.error("Review Creation Failed")
+            navigate("/dashboard/user/my-profile")
+        }
+        dispatch(setLoading(false));
+        toast.dismiss(toastId)
+    }
+}

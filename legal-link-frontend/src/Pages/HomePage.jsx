@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/Common/Header'
 import HeroBg from "../assets/hero-bg.png";
 import user1 from "../assets/user1.png";
@@ -18,8 +18,32 @@ import five from "../assets/img/five.png";
 import six from "../assets/img/six.png";
 import Footer from '../components/Common/Footer';
 import Testimonials from '../components/Common/Testimonials';
+import FilterLawyer from './FilterLawyer';
+import axios from 'axios';
+import { BASE_URL } from '../BASE_URL';
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // Function to fetch data from the API
+    getData();
+  }, []);
+
+  const getData = async() =>{
+    try {
+        const response = await axios.get(`${BASE_URL}/lawyer/get-all`);
+
+        if(!response.data.success){
+            throw new Error(response.data.message)
+        }
+
+        setData(response.data.data);
+    } catch (error) {
+        console.log("error", error);
+    }
+}
   return (
     <div className=' w-full h-full overflow-x-hidden flex flex-col gap-10 relative font-poppins ' >
         {/* image */}
@@ -50,11 +74,13 @@ const HomePage = () => {
                         <img src={user3}  />
                       </div>
                     </div>
-                    <p className=' absolute left-[116px] flex gap-2 items-center text-white text-[16px] ' >+222 Registered Lawyers 
+                    <p className=' absolute left-[116px] flex gap-2 items-center text-white text-[16px] ' >+{data?.length} Registered Lawyers 
                     <div className=' w-[10px] h-[10px] bg-[#00FB0C] rounded-full ' ></div> </p>
                   </div>
+                  <Link to="/search-lawyer" >
                   <button className='outline-none bg-[#DC1F27] rounded-[4px] text-[18px] text-white font-medium self-start
                  px-[30px] py-[15px] drop-shadow-lg transition-all duration-200 hover:scale-105 ' >Talk to Lawyer</button>
+                  </Link>
                 </div>
 
                 {/* right side */}
@@ -130,8 +156,10 @@ const HomePage = () => {
                 <h2 className=' text-[40px] font-poppins text-[#425066] ' >Connect with our </h2>
                 <p className=' text-[48px] text-[#DC1F27] font-semibold mt-[-20px] ' >Legal Advisors</p>
                 <p  className='text-[#425066] text-justify ' >Connect with our legal advisors: Access reliable legal counsel at your fingertips. Our platform offers seamless connectivity to a diverse pool of legal experts, ensuring personalized guidance tailored to your unique needs. From consultations to case assessments, our advisors are here to support you every step of the way..</p>
+                <Link to="/search-lawyer" >
                 <button className='outline-none bg-[#DC1F27] rounded-[4px] text-[18px] text-white font-medium self-start
                  px-[30px] py-[15px] drop-shadow-lg transition-all duration-200 hover:scale-105 ' >Talk to Lawyer</button>
+                </Link>
           </div>
 
 
@@ -144,6 +172,7 @@ const HomePage = () => {
         {/* lawyer profiles from backend */}
         <div className=' w-[90%] mx-auto flex flex-col gap-5  ' >
               <h2 className=' text-[40px] font-poppins text-[#425066] text-center ' >Book the slot with<span className='text-[42px] text-[#DC1F27] font-bold mt-[-20px] ' > expert Lawyers</span> </h2>
+              <FilterLawyer/>
         </div>
 
         <div className=' w-[100%] h-[1px] bg-[#DDDDDD] ' ></div>
@@ -210,8 +239,10 @@ const HomePage = () => {
                  
               </div>
 
+              <Link to="/search-lawyer" >
               <button className='outline-none bg-[#DC1F27] rounded-[4px] text-[18px] text-white  font-medium self-center mt-[20px]
                  px-[30px] py-[15px] drop-shadow-lg transition-all duration-200 hover:scale-105 ' >Talk to Lawyer</button>
+              </Link>
         </div>
 
         <div className=' w-[100%] h-[1px] bg-[#DDDDDD] ' ></div>

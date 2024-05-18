@@ -1,53 +1,56 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { BASE_URL } from '../../BASE_URL';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import Header from '../components/Common/Header'
+import Footer from '../components/Common/Footer'
+import axios from 'axios'
+import { BASE_URL } from '../BASE_URL'
+import { Link } from 'react-router-dom'
 
-const Testimonials = () => {  
-    const [data, setData] = useState([]);
-  const [topSix, setTopSix] = useState([]);
+const AllReviews = () => {
 
-  useEffect(() => {
-    // Function to fetch data from the API
-    getData();
-  }, []);
+    const [instructorData, setInstructorData] = useState();
+    const [loading, setLoading] = useState(false);
 
-  const getData = async() =>{
-    try {
-        const response = await axios.get(`${BASE_URL}/user/review/get-all`);
+    useEffect(()=>{
+        getData();
+    },[])
+    
+    const getData = async() =>{
+        setLoading(true);
+        try {
+            const response = await axios.get(`${BASE_URL}/user/review/get-all`);
+    
+            if(!response.data.success){
+                throw new Error(response.data.message)
+            }
 
-        if(!response.data.success){
-            throw new Error(response.data.message)
+            setInstructorData(response.data.data);
+            setLoading(false);
+        } catch (error) {
+            console.log("error", error);
+            setLoading(false);
         }
-
-        setData(response.data.data);
-    } catch (error) {
-        console.log("error", error);
     }
-}
 
-  useEffect(() => {
-    // Filter the top 6 results
-    if (data.length > 0) {
-      const topResults = data.slice(0, 6);
-      setTopSix(topResults);
-    }
-  }, [data]);      
+    console.log("reviews are", instructorData);
 
+  return (
+    <div className='w-full h-full overflow-x-hidden flex flex-col relative font-poppins' >
+         <div className='absolute' >
+            <Header/>
+        </div>
 
-    return (
-     <>
-       <section class="py-12 bg-white sm:py-16 lg:py-20 mt-[-20px] ">
+        <div className=' mt-[100px] ' >
+        <section class="py-12 bg-white sm:py-16 lg:py-20 mt-[-20px] ">
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="flex flex-col items-center">
             <div class="text-center">
-                <p class="text-lg font-medium text-gray-600 font-pj">{data?.length} people have said how good Legal-Link</p>
+                <p class="text-lg font-medium text-gray-600 font-pj">{instructorData?.length} people have said how good Legal-Link</p>
                 <h2 class="mt-4 text-3xl font-bold text-[#DC1F27] sm:text-4xl xl:text-5xl font-pj">Our happy clients say about us</h2>
             </div>
 
             <div class="mt-8 text-center md:mt-16 md:order-3">
                 <Link to="/all-reviews" >
-                <p title="" class="pb-2 text-base font-bold leading-7 text-gray-900 transition-all duration-200 border-b-2 border-gray-900 hover:border-gray-600 font-pj focus:outline-none focus:ring-1 focus:ring-gray-900 focus:ring-offset-2 hover:text-gray-600"> Check all {data?.length} reviews </p>
+                <a href="#" title="" class="pb-2 text-base font-bold leading-7 text-gray-900 transition-all duration-200 border-b-2 border-gray-900 hover:border-gray-600 font-pj focus:outline-none focus:ring-1 focus:ring-gray-900 focus:ring-offset-2 hover:text-gray-600"> Check all {instructorData?.length} reviews </a>
                 </Link>
             </div>
             <div class="relative mt-10 md:mt-24 md:order-2">
@@ -59,7 +62,7 @@ const Testimonials = () => {
 
                 <div class="relative grid max-w-lg grid-cols-1 gap-6 mx-auto md:max-w-none lg:gap-10 md:grid-cols-3">
                 {
-                topSix?.map((item,ind)=>(
+                instructorData?.map((item,ind)=>(
                     <div key={ind} class="flex flex-col overflow-hidden shadow-xl">
                         <div class="flex flex-col justify-between rounded-md flex-1 p-6 bg-white lg:py-8 lg:px-7">
                             <div class="flex-1">
@@ -93,8 +96,16 @@ const Testimonials = () => {
         </div>
     </div>
 </section>
-     </>
-    )
+
+        </div>
+
+        <div className='w-[90%] mx-auto ' >
+        <div className=' w-[100%] h-[1px] bg-[#DDDDDD] ' ></div>
+          <Footer/>
+        </div>
+
+    </div>
+  )
 }
 
-export default Testimonials;
+export default AllReviews

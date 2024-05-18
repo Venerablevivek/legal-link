@@ -4,6 +4,7 @@ const UserStorage = require("../Model/User.js");
 const Lawyer = require("../Model/Lawyer.js");
 const dotenv = require("dotenv");
 const Booking = require("../Model/BookingSchema.js");
+const Review =  require("../Model/Review.js");
 
 dotenv.config();
 
@@ -385,3 +386,64 @@ exports.getLawyerProfile = async(req,res)=>{
         });
     }
 }
+
+exports.createReview = async(req,res)=>{
+    try {
+
+        console.log("isme aaya");
+
+       const {
+        name, 
+        job, 
+        reviewText, 
+        rating, 
+        imageUrl, 
+       } = req.body;
+         //retirieve appointments from booking for specific user
+        const reviews = await Review.create({
+            name:name, 
+            job:job, 
+            reviewText:reviewText, 
+            rating:rating, 
+            imageUrl:imageUrl
+        })
+
+        return res.status(200).json({
+            success:true,
+            message:'Review Created Successfully',
+            data:reviews
+        });
+        
+    } catch (error) {
+        res.status(500).json({
+            success:false,
+            message:`Cannot Created Review something went wrong ${error.message} `
+        });
+    }
+};
+
+exports.getAllReview = async(req,res)=>{
+    try {
+         //retirieve appointments from booking for specific user
+        const reviews = await Review.find({});
+
+        if(!reviews){
+            return res.status(500).json({
+                success:false,
+                message:'Cannot fetch reviews'
+            });
+        }
+
+        return res.status(200).json({
+            success:true,
+            message:'Review fetched Successfully',
+            data:reviews
+        });
+        
+    } catch (error) {
+        res.status(500).json({
+            success:false,
+            message:`Cannot fetched Review something went wrong ${error.message} `
+        });
+    }
+};

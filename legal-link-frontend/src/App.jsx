@@ -11,6 +11,8 @@ import SearchLawyer from './Pages/SearchLawyer';
 import LawyerBooking from './Pages/LawyerBooking';
 import AboutUs from './Pages/AboutUs';
 import LegalKnowledge from './Pages/LegalKnowledge';
+import AllReviews from './Pages/AllReviews';
+import CheckoutSuccess from './Pages/CheckoutSuccess';
 
 function App() {
 
@@ -26,6 +28,8 @@ function App() {
       <Route path='/book-lawyer/:id' element={<LawyerBooking/>} />
       <Route path='/about-us' element={<AboutUs/>} />
       <Route path='/legal-knowledge' element={<LegalKnowledge/>} />
+      <Route path='/all-reviews' element={<AllReviews/>} />
+      <Route path='/checkout-success' element={<CheckoutSuccess/>} />
       <Route path='/register' element={
                 <Register/>
             } />
