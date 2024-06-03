@@ -81,7 +81,7 @@ export function logout(navigate) {
       dispatch(setToken(null))
       dispatch(setUser(null))
       localStorage.removeItem("token")
-      localStorage.removeItem("user")
+      localStorage.removeItem("User")
       toast.success("Logged Out")
       navigate("/")
     }

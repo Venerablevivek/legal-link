@@ -3,13 +3,16 @@ import { formateDate } from '../../utils/formateDate'
 import { useSelector } from 'react-redux';
 import { BASE_URL } from '../../BASE_URL';
 import {toast} from "react-hot-toast";
+import Spinner from '../Common/Spinner';
 
 const MyBookings = () => {
 
     const [appointments, setAppointments] = useState([]);
     const { token } = useSelector((state) => state.auth);
+    const [loading, setLoading] = useState(false);
 
     const getAppointments = async() =>{
+        setLoading(true);
       try {
             const url = `${BASE_URL}/lawyer/profile/me`;
             const res = await fetch(url, {
@@ -23,9 +26,10 @@ const MyBookings = () => {
               throw new Error(result.message);
           }
             setAppointments(result.data);
-
+            setLoading(false);
       } catch (error) {
         console.log(`Error while fetching appointments`, error.message);
+        setLoading(false);
       }
     }
 
@@ -35,8 +39,13 @@ const MyBookings = () => {
 
   return (
     <div className='overflow-hidden rounded-lg  mt-[10px] ' >
-    
-      <table className='w-full text-left text-sm min-w-full divide-y divide-gray-200 mt-5 ' >
+        {
+            loading && (<div className=' mt-[100px] mb-[100px] ' >
+                <Spinner/>
+            </div>)
+        }
+    {
+        !loading && (<table className='w-full text-left text-sm min-w-full divide-y divide-gray-200 mt-5 ' >
         <thead className='text-xs  uppercase bg-[#5D59D9] text-white rounded-lg ' >
             <tr className='rounded-md' >
                 <th scope='col' className='px-6 py-3 ' >
@@ -113,7 +122,8 @@ const MyBookings = () => {
             }
         </tbody>
 
-    </table>
+    </table>)
+    }
     </div>
   )
 }

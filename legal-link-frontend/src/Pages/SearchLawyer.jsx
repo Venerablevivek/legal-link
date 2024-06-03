@@ -9,6 +9,7 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import LawyerCards from '../components/Common/LawyerCards';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Spinner from "../components/Common/Spinner.jsx";
 
 const SearchLawyer = () => {
 
@@ -96,9 +97,18 @@ const getData = async() =>{
 
             </div>
 
-            <div className=' mt-[30px] ' >
+            {
+                loading && (
+                    <div className='mt-[50px] mb-[50px] ' >
+                        <Spinner/>
+                    </div>
+                )
+            }
+            {
+                !loading && (<div className=' mt-[30px] ' >
                 <LawyerCards filteredData={filteredData} />
-            </div>
+            </div>)
+            }
 
             {/* down */}
         </div>

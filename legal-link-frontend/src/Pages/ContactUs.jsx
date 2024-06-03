@@ -65,20 +65,21 @@ const ContactUs = () => {
                 </div>
             <div >
                 <div className="w-[600px] px-8 py-10 mx-auto overflow-hidden bg-white shadow-2xl rounded-xl dark:bg-gray-900 lg:max-w-xl">
-                    <form>
+                    <form action="https://api.web3forms.com/submit" method="POST" >
+                    <input type="hidden" name="access_key" value="f5b84b25-c253-416c-b881-68d0a80a31cc"/>
                         <div class="flex-1">
                             <label class="block mb-2 text-[18px] font-bold font-inter text-gray-600 dark:text-gray-200">Full Name</label>
-                            <input type="text" placeholder="John Doe" class="block w-full px-5 py-3 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600  outline-none " />
+                            <input type="text" placeholder="John Doe" name='FullName' class="block w-full px-5 py-3 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600  outline-none " />
                         </div>
 
                         <div class="flex-1 mt-6">
                             <label class="block mb-2 text-[18px] font-bold font-inter text-gray-600 dark:text-gray-200">Email address</label>
-                            <input type="email" placeholder="johndoe@example.com" class="block w-full px-5 py-3 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600  outline-none " />
+                            <input type="email" placeholder="johndoe@example.com" name='Email' class="block w-full px-5 py-3 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600  outline-none " />
                         </div>
 
                         <div class="w-full mt-6">
                             <label class="block mb-2 text-[18px] font-bold font-inter text-gray-600 dark:text-gray-200">Message</label>
-                            <textarea class="block w-full h-32 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md md:h-48 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 outline-none " placeholder="Message"></textarea>
+                            <textarea name='message' class="block w-full h-32 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md md:h-48 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 outline-none " placeholder="Message"></textarea>
                         </div>
 
                         <button class="w-full px-6 py-3 mt-6 text-[18px] font-bold font-inter tracking-wide text-white capitalize transition-colors duration-300 transform bg-[#DC1F27] rounded-md hover:bg-[#ff4b54] focus:outline-none focus:ring focus:ring-blue-400 focus:ring-opacity-50">
