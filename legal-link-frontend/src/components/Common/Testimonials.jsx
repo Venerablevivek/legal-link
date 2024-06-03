@@ -2,10 +2,12 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { BASE_URL } from '../../BASE_URL';
 import { Link } from 'react-router-dom';
+import Spinner from './Spinner';
 
 const Testimonials = () => {  
     const [data, setData] = useState([]);
   const [topSix, setTopSix] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // Function to fetch data from the API
@@ -13,6 +15,7 @@ const Testimonials = () => {
   }, []);
 
   const getData = async() =>{
+    setLoading(true);
     try {
         const response = await axios.get(`${BASE_URL}/user/review/get-all`);
 
@@ -21,8 +24,10 @@ const Testimonials = () => {
         }
 
         setData(response.data.data);
+        setLoading(false);
     } catch (error) {
         console.log("error", error);
+        setLoading(false);
     }
 }
 
@@ -45,7 +50,18 @@ const Testimonials = () => {
                 <h2 class="mt-4 text-3xl font-bold text-[#DC1F27] sm:text-4xl xl:text-5xl font-pj">Our happy clients say about us</h2>
             </div>
 
-            <div class="mt-8 text-center md:mt-16 md:order-3">
+            {
+                loading && (
+                    <div>
+                        <Spinner/>
+                    </div>
+                )
+            }
+
+           {
+            !loading && (
+                <>
+                 <div class="mt-8 text-center md:mt-16 md:order-3">
                 <Link to="/all-reviews" >
                 <p title="" class="pb-2 text-base font-bold leading-7 text-gray-900 transition-all duration-200 border-b-2 border-gray-900 hover:border-gray-600 font-pj focus:outline-none focus:ring-1 focus:ring-gray-900 focus:ring-offset-2 hover:text-gray-600"> Check all {data?.length} reviews </p>
                 </Link>
@@ -90,6 +106,9 @@ const Testimonials = () => {
             }
                 </div>
             </div>
+                </>
+            )
+           }
         </div>
     </div>
 </section>
