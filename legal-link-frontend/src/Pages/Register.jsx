@@ -8,6 +8,7 @@ import {useDispatch } from "react-redux";
 
 import { setSignupData } from '../slices/authSlice.js';
 import { register } from '../services/authAPI.js';
+import toast from 'react-hot-toast';
 
 const Register = () => {
     const navigate = useNavigate();

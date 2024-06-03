@@ -1,0 +1,5 @@
+.active{
+    color: #DC1F27;
+    font-weight: 700;
+    transition: all 200ms ease;
+}

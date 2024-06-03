@@ -35,8 +35,8 @@ export function register(fullName,email,password,confirmPassword,phoneNumber,gen
             navigate("/login");
 
         } catch (error) {
-            console.log("SIGNUP API ERROR.............", error)
-            toast.error("Signup Failed")
+            console.log("SIGNUP API ERROR.............", error.response.data.message)
+            toast.error(`SignUp Failed due to ${error.response.data.message}`)
             navigate("/register")
         }
         dispatch(setLoading(false));
@@ -69,7 +69,7 @@ export function login(email, password, navigate){
 
         } catch (error) {
             console.log("LOGIN API ERROR..............", error)
-            toast.error(`Login failed due to ${error.message}`)
+            toast.error(`Login failed due to ${error.response.data.message}`)
         }
         dispatch(setLoading(false))
         toast.dismiss(toastId)
@@ -112,7 +112,7 @@ export function updateUser(id, fullName,phoneNumber,gender,imageUrl,height,weigh
 
         } catch (error) {
             console.log("Update user api ERROR.............", error)
-            toast.error("Update User Failed")
+            toast.error(`Update User Failed, ${error.response.data.message}`)
             navigate("/dashboard/user/my-profile")
         }
         dispatch(setLoading(false));
@@ -141,7 +141,7 @@ export function updateLawyer(id, fullName,imageUrl,gender,phoneNumber,weight,hei
 
         } catch (error) {
             console.log("Update Lawyer api ERROR.............", error)
-            toast.error("Update Lawyer Failed")
+            toast.error(`${error.response.data.message}`)
             navigate("/dashboard/lawyer/my-profile")
         }
         dispatch(setLoading(false));
@@ -194,10 +194,111 @@ export function createReview(name,rating,job,imageUrl,reviewText,navigate) {
 
         } catch (error) {
             console.log("Update user api ERROR.............", error)
-            toast.error("Review Creation Failed")
+            toast.error(`Review Can't created due to ${error.response.data.message}`)
             navigate("/dashboard/user/my-profile")
         }
         dispatch(setLoading(false));
         toast.dismiss(toastId)
+    }
+}
+
+export function createLawyerDetails(id,fullName,email,Document1,Document2,specialization, navigate) {
+
+    return async (dispatch) => {
+        const toastId = toast.loading("Loading...")
+        dispatch(setLoading(true))
+        try {
+            const response = await apiConnector("POST", `${BASE_URL}/lawyer/verify-details`, {
+                id,fullName,email,Document1,Document2,specialization
+            });
+
+            if(!response.data.success){
+                throw new Error(response.data.message)
+            }
+
+            toast.success("Documents Uploaded Successfully");
+            navigate("/dashboard/lawyer/my-profile");
+
+        } catch (error) {
+            console.log("Update user api ERROR.............", error)
+            toast.error("Unable to upload Documents ", error.response.data.message);
+            navigate("/dashboard/lawyer/my-profile")
+        }
+        dispatch(setLoading(false));
+        toast.dismiss(toastId)
+    }
+}
+
+export function updateLawyerStatus(id, status, navigate) {
+
+    return async (dispatch) => {
+        const toastId = toast.loading("Loading...")
+        dispatch(setLoading(true))
+        try {
+            const isApproved = status;
+            const response = await apiConnector("PUT", `${BASE_URL}/lawyer/update-lawyer-status`, {
+                id, isApproved
+            });
+
+            if(!response.data.success){
+                throw new Error(response.data.message)
+            }
+
+            toast.success("Lawyer Status Updated Successfully");
+            navigate("/admin-dashboard");
+
+        } catch (error) {
+            console.log("Update Lawyer api ERROR.............", error)
+            toast.error("Update Lawyer Status Failed",error.response.data.message)
+            navigate("/admin-dashboard")
+        }
+        dispatch(setLoading(false));
+        toast.dismiss(toastId)
+    }
+}
+
+export function getPasswordResetToken(email, setEmailSent) {
+    return async (dispatch) => {
+        dispatch(setLoading(true))
+        try{
+            const response = await apiConnector("POST", `${BASE_URL}/auth/reset-password-token`, {email,})
+
+            console.log("RESET PASSWORD TOKEN RESPONSE..........", response)
+
+            if(!response.data.success) {
+                throw new Error(response.data.message)
+            }
+
+            toast.success("Password Reset Email Sent Successfully")
+            setEmailSent(true);
+        } catch(error) {
+            console.log("RESET PASSWORD TOKEN ERROR", error)
+            toast.error("Failed To Send Email For Resetting Password",error.response.data.message);
+        }
+        dispatch(setLoading(false))
+    }
+}
+
+
+export function resetPassword(password, confirmPassword, token, navigate){
+    return async(dispatch) => {
+        dispatch(setLoading(true));
+        try {
+
+            const response  = await apiConnector("POST", `${BASE_URL}/auth/reset-password`, {password, confirmPassword, token});
+
+            console.log("RESET Password response ", response);
+
+            if(!response.data.success) {
+                throw new Error(response.data.message)
+            }
+
+            toast.success("Password has been reset Successfully");
+            navigate("/reset-complete");
+        } catch (error) {
+            console.log("RESET PASSWORD TOKEN ERROR", error)
+            toast.error("Unable to Reset Password, ",error.response.data.message);
+        }
+        dispatch(setLoading(false));
     }
 }

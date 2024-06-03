@@ -62,7 +62,7 @@ const Login = () => {
                     />
                 </div>
             </div>
-            <div className='flex gap-8 bg-[#FFEBE6] px-6 py-4 rounded-md ' >
+            <div className='flex gap-4 bg-[#FFEBE6] px-6 py-4 rounded-md relative ' >
                 <div className='w-[100%] flex flex-col gap-1' >
                     <label id='password' className=' font-poppins text-black font-semibold  ' >Password</label>
                     <input
@@ -75,6 +75,9 @@ const Login = () => {
                         className=' w-[100%] rounded-md bg-transparent font-bold text-[16px] outline-none placeholder:text-[#ec9883] '
                     />
                 </div>
+                <Link to="/reset-password" >
+                      <p className='absolute right-5 top-8 text-red-600 font-semibold ' >Forgot Password</p>
+                </Link>
             </div>
                 </div>
          

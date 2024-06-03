@@ -13,6 +13,11 @@ import AboutUs from './Pages/AboutUs';
 import LegalKnowledge from './Pages/LegalKnowledge';
 import AllReviews from './Pages/AllReviews';
 import CheckoutSuccess from './Pages/CheckoutSuccess';
+import Admin from './components/Admin/Admin';
+import AdminUpdate from './components/Admin/AdminUpdate';
+import ForgotPassword from './Pages/ForgotPassword.jsx';
+import UpdatePassword from './Pages/UpdatePassword.jsx';
+import ResetComplete from './Pages/ResetComplete.jsx';
 
 function App() {
 
@@ -30,6 +35,16 @@ function App() {
       <Route path='/legal-knowledge' element={<LegalKnowledge/>} />
       <Route path='/all-reviews' element={<AllReviews/>} />
       <Route path='/checkout-success' element={<CheckoutSuccess/>} />
+      <Route path='/admin-dashboard' element={<Admin/>} />
+      <Route path='/admin/update/:id' element={<AdminUpdate/>} />
+      <Route path='/reset-password' element={<ForgotPassword/>} />
+      <Route path='/reset-complete' element={<ResetComplete/>} />
+      <Route
+        path="update-password/:id"
+        element={
+            <UpdatePassword />
+        }
+      />  
       <Route path='/register' element={
                 <Register/>
             } />

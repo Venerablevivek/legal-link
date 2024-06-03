@@ -266,6 +266,41 @@ exports.updateLawyer = async(req,res)=>{
     }
 }
 
+// update lawyer status
+exports.updateLawyerStatus = async(req,res)=>{
+    try{
+        const {
+            id,
+            isApproved
+        } = req.body;
+        //validate fields
+
+        console.log(id);
+        console.log(isApproved);
+
+        const userData = await Lawyer.findByIdAndUpdate({_id:id},
+                {
+                    isApproved:isApproved,
+              },
+            {new: true},
+        );
+
+        console.log(userData);
+
+        return res.status(200).json({
+            success:true,
+            message:'Lawyer Status Updated Successfully',
+            data:userData,
+        });
+
+
+    }catch(err){
+        return res.status(500).json({
+            success:false,
+            message:`Cannot Update Lawyer Status due to ${err.message}`,
+        });
+    }
+}
 
 exports.getUser = async(req,res)=>{
     try {

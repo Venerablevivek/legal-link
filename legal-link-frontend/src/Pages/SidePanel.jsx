@@ -1,10 +1,9 @@
 import React from 'react'
 import convertTime from '../utils/convertTime'
 import { BASE_URL } from '../BASE_URL';
-import {toast} from "react-hot-toast";
+import {toast, ToastBar} from "react-hot-toast";
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
 import { apiConnector } from '../services/apiConnector';
 
 // Function to load script and append in DOM tree.
@@ -39,7 +38,7 @@ const SidePanel = ({instructorId, ticketPrice, timeSlots}) => {
             }
 
             if(user.accountType==='Lawyer'){
-                toast.warning("Lawyers Cannot Book");
+                toast.error("Lawyers Cannot Book");
                 return;
             }
 
@@ -123,7 +122,7 @@ const SidePanel = ({instructorId, ticketPrice, timeSlots}) => {
         </div>
         <button 
          onClick={bookingHandler} className='w-full bg-[#DC1F27] font-semibold text-white px-2 py-3 rounded-md
-            hover:bg-[#9c373c] transition-all duration-300 mt-8' >Book Class</button>
+            hover:bg-[#9c373c] transition-all duration-300 mt-8' >Book Appointment</button>
     </div>
   )
 }

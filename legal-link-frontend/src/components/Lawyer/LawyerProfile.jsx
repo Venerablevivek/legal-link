@@ -14,7 +14,7 @@ const LawyerProfile = () => {
   const { user } = useSelector((state) => state.profile);
   const { loading } = useSelector((state) => state.auth);
 
-  console.log("data is ", user);
+  console.log("data is ", user.documents);
 
   useEffect(()=>{
     setFormData({

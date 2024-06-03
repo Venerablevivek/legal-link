@@ -27,6 +27,9 @@ const LawyerSchema = new mongoose.Schema({
         enum: ['Admin', 'Lawyer'],
         required: true
     },
+    documents: {
+      type: String,
+    },
     gender: {
         type: String, 
         enum: ["male", "female", "other"]
@@ -47,9 +50,6 @@ const LawyerSchema = new mongoose.Schema({
   },
   qualifications: {
     type: Array,
-  },
-  document:{
-    type: String
   },
   experiences: {
     type: Array,

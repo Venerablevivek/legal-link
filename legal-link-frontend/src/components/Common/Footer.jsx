@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Logo from "../../assets/logo.png";
+import { Link } from 'react-router-dom';
 
 const Footer = () => {        
     return (
@@ -64,19 +65,19 @@ const Footer = () => {
 
                 <ul className="mt-6 space-y-4">
                     <li>
-                        <a href="#" title="" className="flex text-base text-black transition-all duration-200 hover:text-[#DC1F27] focus:text-[#DC1F27]"> About </a>
+                        <Link to="/about-us" title="" className="flex text-base text-black transition-all duration-200 hover:text-[#DC1F27] focus:text-[#DC1F27]"> About </Link>
                     </li>
 
                     <li>
-                        <a href="#" title="" className="flex text-base text-black transition-all duration-200 hover:text-[#DC1F27] focus:text-[#DC1F27]"> Features </a>
+                        <Link to="/search-lawyer" title="" className="flex text-base text-black transition-all duration-200 hover:text-[#DC1F27] focus:text-[#DC1F27]"> Search Lwayer </Link>
                     </li>
 
                     <li>
-                        <a href="#" title="" className="flex text-base text-black transition-all duration-200 hover:text-[#DC1F27] focus:text-[#DC1F27]"> Works </a>
+                        <Link to="/contact-us" title="" className="flex text-base text-black transition-all duration-200 hover:text-[#DC1F27] focus:text-[#DC1F27]"> Contact Us </Link>
                     </li>
 
                     <li>
-                        <a href="#" title="" className="flex text-base text-black transition-all duration-200 hover:text-[#DC1F27] focus:text-[#DC1F27]"> Career </a>
+                        <Link to="https://legal-NavLink-storage.netlify.app/" title="" className="flex text-base text-black transition-all duration-200 hover:text-[#DC1F27] focus:text-[#DC1F27]"> Legal Link Storage </Link>
                     </li>
                 </ul>
             </div>
